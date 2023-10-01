@@ -1,7 +1,7 @@
 // don't import from here, that's handled already
 // instead this is just setting types for this folder
 
-import { config } from '@my/ui'
+import { config } from '../../packages/ui/src/tamagui.config';
 
 type Conf = typeof config
 

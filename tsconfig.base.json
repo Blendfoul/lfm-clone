@@ -19,14 +19,18 @@
     "noUnusedParameters": false,
     "useUnknownInCatchVariables": false,
     "preserveConstEnums": true,
-    // DONT DO THIS so jsdoc will remain
     "removeComments": false,
     "skipLibCheck": true,
     "sourceMap": false,
     "strictNullChecks": true,
     "target": "es2020",
     "types": ["node"],
-    "lib": ["dom", "esnext"]
+    "lib": ["dom", "esnext"],
+    "paths": {
+      "@lfm-clone/app/*": ["./packages/app/*"],
+      "@lfm-clone/containers": ["./packages/containers/src/index.ts"],
+      "@lfm-clone/ui": ["./packages/ui/src/index.ts"]
+    }
   },
   "exclude": ["_"],
   "typeAcquisition": {

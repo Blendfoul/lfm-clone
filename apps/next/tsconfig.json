@@ -1,10 +1,23 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "baseUrl": ".",
     "paths": {
-      "react-native": ["react-native-web"]
+      "@lfm-clone/containers": [
+        "../../packages/containers/src/index.ts"
+      ],
+      "@lfm-clone/ui": [
+        "../../packages/ui/src/index.ts"
+      ],
+      "react-native": [
+        "react-native-web"
+      ]
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -24,6 +37,14 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "../../dist/apps/next/.next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

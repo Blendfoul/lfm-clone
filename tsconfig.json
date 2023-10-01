@@ -1,12 +1,4 @@
 {
-  "compilerOptions": {
-    "strictNullChecks": true,
-    "noUncheckedIndexedAccess": true,
-    "paths": {
-      "app/*": ["./packages/app/*"],
-      "@my/ui/*": ["./packages/ui/*"]
-    }
-  },
-  "extends": "expo/tsconfig.base",
+  "extends": "./tsconfig.base.json",
   "exclude": ["**/node_modules", "**/dist", "**/types", "apps/next/out", "apps/next/.next", "apps/next/.tamagui"]
 }

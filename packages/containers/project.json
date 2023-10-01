@@ -1,0 +1,26 @@
+{
+  "name": "containers",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/containers/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/containers",
+        "main": "packages/containers/src/index.ts",
+        "tsConfig": "packages/containers/tsconfig.lib.json",
+        "assets": ["packages/containers/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/containers/**/*.ts", "packages/containers/package.json"]
+      }
+    }
+  },
+  "tags": []
+}
