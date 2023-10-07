@@ -11,5 +11,5 @@ export interface Car {
   non_base_content:   number;
   content_link:       null | string;
   content_link_name:  null | string;
-  additional_content: any[];
+  additional_content: unknown[];
 }

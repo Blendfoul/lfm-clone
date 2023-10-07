@@ -1,6 +1,6 @@
 import { TamaguiProvider, TamaguiProviderProps } from "tamagui";
 
-import { config } from "../tamagui.config";
+import { config } from "../config";
 import { PropsWithChildren } from "react";
 
 type Props = PropsWithChildren<TamaguiProviderProps>;

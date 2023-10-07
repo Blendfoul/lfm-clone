@@ -6,9 +6,18 @@ import { Card, H5, Image, Paragraph, XStack, YStack } from '@lfm-clone/ui';
 
 export const SessionCard: React.FC<Session> = ({ track, race_id, race_date, season_week, registered, slots, weather_settings, start_times }) => {
   return (
-    <Link href={`/session/${race_id}`}>
-      <Card animation="bouncy" bordered size="$4">
+    <Card animation="bouncy" bordered size="$4" flex={1} maxWidth={400}>
+      <Link href={`/session/${race_id}`}>
         <Card.Header padded>
+        <Image 
+            resizeMode="contain"
+            overflow="hidden"
+            width={365}
+            height={250}
+            source={{ uri: `https://lowfuelmotorsport.com/assets/img/tracks/${track.thumbnail}` }}
+            alt={track.track_name}
+            aspectRatio={16 / 9}
+          />
           <H5>Week {season_week} | {track.track_name}</H5>
           <XStack space="$1" ai="center">
           <User />
@@ -20,13 +29,13 @@ export const SessionCard: React.FC<Session> = ({ track, race_id, race_date, seas
             <Paragraph>{new Date(race_date).toUTCString()}</Paragraph>
             <XStack space="$2" ai="center">
               <Cloud />
-              <Paragraph>{weather_settings.cloudLevel * 100}%</Paragraph>
+              <Paragraph>{(weather_settings.cloudLevel * 100).toPrecision(2)}%</Paragraph>
               <ThermometerSun />
               <Paragraph>{weather_settings.ambientTemp}°C</Paragraph>
               <CloudRain />
-              <Paragraph>{weather_settings.rain * 100}%</Paragraph>
+              <Paragraph>{(weather_settings.rain * 100).toPrecision(2)}%</Paragraph>
               <CloudCog />
-              <Paragraph>{weather_settings.weatherRandomness * 10}%</Paragraph>
+              <Paragraph>{(weather_settings.weatherRandomness * 10).toPrecision(2)}%</Paragraph>
             </XStack>
             <XStack space="$2" ai="center">
               <Clock />
@@ -34,18 +43,7 @@ export const SessionCard: React.FC<Session> = ({ track, race_id, race_date, seas
             </XStack>
           </YStack>
         </Card.Footer>
-        <Card.Background borderRadius="$5">
-          <Image 
-            resizeMode="cover"
-            alignSelf="center"
-            source={{
-              uri: `https://lowfuelmotorsport.com/assets/img/tracks/${track.thumbnail}`,
-              height: 500,
-              width: 500,
-            }} 
-          />
-        </Card.Background>
-      </Card>
-    </Link>
+      </Link>
+    </Card>
   );
 };

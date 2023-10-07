@@ -1,2 +1,3 @@
 export * from 'tamagui';
-export * from './grid';
+export { Grid } from './grid';
+export { Image } from './image';

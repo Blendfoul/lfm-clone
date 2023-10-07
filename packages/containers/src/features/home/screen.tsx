@@ -1,10 +1,13 @@
-import { H1, YStack } from '@lfm-clone/ui';
-import { SeasonSelector, SessionGrid } from '../../containers';
+import { YStack, Grid } from '@lfm-clone/ui';
+import { SeasonSelector, SessionGrid, UserData } from '../../containers';
 
 export function HomeScreen() {
   return (
     <YStack py="$4" px="$2" flex={1} space>
-        <SeasonSelector />
+        <Grid gridTemplateColumns="1fr auto" gap="$3">
+          <SeasonSelector />
+          <UserData />
+        </Grid>
         <SessionGrid />
     </YStack>
   )

@@ -49,6 +49,9 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
+  images: {
+    domains: ['lowfuelmotorsport.com', 'steamcdn-a.akamaihd.net'],
+  },
 };
 
 const plugins = [

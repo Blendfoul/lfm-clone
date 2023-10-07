@@ -17,7 +17,8 @@
         "production": {
           "buildLibsFromSource": true
         }
-      }
+      },
+      "inputs": []
     },
     "serve": {
       "executor": "@nx/next:server",
@@ -52,7 +53,8 @@
         "lintFilePatterns": [
           "apps/next/**/*.{ts,tsx,js,jsx}"
         ],
-        "eslintConfig": "apps/next/.eslintrc.js",
+        "eslintConfig": "apps/next/.eslintrc.json",
+        "ignorePath": "apps/next/.eslintignore",
         "fix": true,
         "cache": true
       }

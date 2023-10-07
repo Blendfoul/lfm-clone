@@ -27,7 +27,6 @@
     "types": ["node"],
     "lib": ["dom", "esnext"],
     "paths": {
-      "@lfm-clone/app/*": ["./packages/app/*"],
       "@lfm-clone/containers": ["./packages/containers/src/index.ts"],
       "@lfm-clone/ui": ["./packages/ui/src/index.ts"]
     }

@@ -1,22 +1,19 @@
-import { Button, Paragraph, YStack } from '@lfm-clone/ui'
-import { ChevronLeft } from '@tamagui/lucide-icons'
+import { Grid, useMedia } from '@lfm-clone/ui';
 
-import { useLink, useParams } from 'solito/navigation'
+import { useMemo } from 'react';
+import { RaceEntries, RaceInformation } from '../../containers';
 
-type Params = { id: string };
+export function SessionDetailScreen() {
+  const media = useMedia();
 
-export function UserDetailScreen() {
-  const { id } = useParams<Params>();
-  const link = useLink({
-    href: '/',
-  })
+  const templateColumns = useMemo(() => {
+    return media.gtMd ? 'auto 1fr' : '1fr';
+  }, [media]);
 
   return (
-    <YStack f={1} jc="center" ai="center" space>
-      <Paragraph ta="center" fow="700">{`User ID: ${id}`}</Paragraph>
-      <Button {...link} icon={ChevronLeft}>
-        Go Home
-      </Button>
-    </YStack>
-  )
+    <Grid gridTemplateColumns={templateColumns} gap="$2">
+      <RaceInformation />
+      <RaceEntries />
+    </Grid>
+  );
 }

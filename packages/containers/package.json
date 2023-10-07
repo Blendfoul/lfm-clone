@@ -4,5 +4,15 @@
   "type": "commonjs",
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "@lfm-clone/ui": "*",
+    "react": "^18.2.0",
+    "swr": "^2.2.4",
+    "solito": "^4.0.1",
+    "@tamagui/lucide-icons": "latest",
+    "react-native": "0.72.4",
+    "react-native-safe-area-context": "^4.5.2",
+    "@swc/helpers": "~0.5.2"
+  }
 }

@@ -1,5 +1,5 @@
 'use client'
 
-import { UserDetailScreen } from '@lfm-clone/containers';
+import { SessionDetailScreen } from '@lfm-clone/containers';
 
-export default UserDetailScreen
+export default SessionDetailScreen;

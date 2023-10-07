@@ -5,3 +5,4 @@ export * from './track';
 export * from './season';
 export * from './user';
 export * from './session';
+export { Race } from './race';
