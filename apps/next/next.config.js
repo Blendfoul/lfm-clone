@@ -18,6 +18,7 @@ const tamaguiPlugin = withTamagui({
   outputCSS: process.env.NODE_ENV === 'production' ? './public/tamagui.css' : null,
   logTimings: true,
   disableExtraction,
+  enableCSSOptimizations: false,
   // experiment - reduced bundle size react-native-web
   useReactNativeWebLite: true,
   shouldExtract: (path) => {
@@ -50,7 +51,14 @@ const nextConfig = {
     scrollRestoration: true,
   },
   images: {
-    domains: ['lowfuelmotorsport.com', 'steamcdn-a.akamaihd.net'],
+    domains: [
+      'lowfuelmotorsport.com',
+      'steamcdn-a.akamaihd.net',
+      'avatars.steamstatic.com',
+      'api2.lowfuelmotorsport.com',
+      'avatars.akamai.steamstatic.com',
+      'api.lowfuelmotorsport.de',
+    ],
   },
 };
 

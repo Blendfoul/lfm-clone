@@ -12,6 +12,9 @@ const CURRENT_SERIES = 142;
 export const SessionGrid: React.FC = () => {
   const media = useMedia();
   const { state } = useApplicationState();
+
+  console.log(state);
+
   const { data, isValidating, error, mutate } = useSWR<SessionContainer>(`v2/seasons/getUpcomingSessions/${state.selectedSeries ?? CURRENT_SERIES}`, {
     revalidateOnFocus: true,
   });
@@ -27,15 +30,19 @@ export const SessionGrid: React.FC = () => {
   }, [data]);
 
   const templateColumns = useMemo(() => {
+    if (media.gtLg) {
+      return 'repeat(4, auto)';
+    }
+    
     if (media.gtMd) {
-      return 'repeat(3, 1fr)';
+      return 'repeat(3, auto)';
     }
 
     if (media.gtSm) {
-      return 'repeat(2, 1fr)';
+      return 'repeat(2, auto)';
     }
 
-    return '1fr';
+    return 'auto';
   }, [media]);
 
   if (error || !data) {

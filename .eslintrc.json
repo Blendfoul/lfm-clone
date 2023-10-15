@@ -1,6 +1,10 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:eslint-plugin/recommended"
+  ],
   "plugins": ["@nx"],
   "overrides": [
     {

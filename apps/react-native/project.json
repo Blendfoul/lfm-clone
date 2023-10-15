@@ -20,7 +20,9 @@
     "run-ios": {
       "executor": "@nx/react-native:run-ios",
       "dependsOn": ["ensure-symlink", "sync-deps", "pod-install"],
-      "options": {}
+      "options": {
+        "simulator": "iPhone 15 Pro"
+      }
     },
     "bundle-ios": {
       "executor": "@nx/react-native:bundle",

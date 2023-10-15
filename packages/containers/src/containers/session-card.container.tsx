@@ -1,49 +1,55 @@
-import { Link } from "solito/link";
 import { Session } from "../types";
-import { User, Cloud, CloudCog, ThermometerSun, CloudRain, Clock } from '@tamagui/lucide-icons';
+import { User, Clock } from '@tamagui/lucide-icons';
+import { utcToZonedTime } from 'date-fns-tz';
 
-import { Card, H5, Image, Paragraph, XStack, YStack } from '@lfm-clone/ui';
+import { Card, Image, Paragraph, Weather, XStack, YStack } from '@lfm-clone/ui';
 
 export const SessionCard: React.FC<Session> = ({ track, race_id, race_date, season_week, registered, slots, weather_settings, start_times }) => {
   return (
-    <Card animation="bouncy" bordered size="$4" flex={1} maxWidth={400}>
-      <Link href={`/session/${race_id}`}>
-        <Card.Header padded>
-        <Image 
-            resizeMode="contain"
-            overflow="hidden"
-            width={365}
-            height={250}
-            source={{ uri: `https://lowfuelmotorsport.com/assets/img/tracks/${track.thumbnail}` }}
-            alt={track.track_name}
-            aspectRatio={16 / 9}
-          />
-          <H5>Week {season_week} | {track.track_name}</H5>
-          <XStack space="$1" ai="center">
-          <User />
-          <Paragraph>{registered} / {slots}</Paragraph>
+    <Card 
+      animation="bouncy" 
+      bordered 
+      size="$4" 
+      flex={1} 
+      href={`/session/${race_id}`}
+      title={`Week ${season_week} | ${track.track_name}`}
+      header={
+        <>
+          <XStack width="100%" height={250} aspectRatio={16 / 9}>
+            <Image 
+              resizeMode="contain"
+              overflow="hidden"
+              width="100%"
+              height="100%"
+              source={{ uri: `https://lowfuelmotorsport.com/assets/img/tracks/${track.thumbnail}` }}
+              alt={track.track_name}
+              $platform-web={{
+                loading: 'eager',
+                priority: true,
+                fill: true,
+                src: `https://lowfuelmotorsport.com/assets/img/tracks/${track.thumbnail}`,
+                alt: track.track_name,
+              }}
+            />
           </XStack>
-        </Card.Header>
-        <Card.Footer padded backgroundColor="$white">
+          <XStack space="$1" ai="center">
+            <User />
+            <Paragraph>{registered} / {slots}</Paragraph>
+          </XStack>
+        </>
+      }
+      footer={
+        <>
           <YStack space>
-            <Paragraph>{new Date(race_date).toUTCString()}</Paragraph>
-            <XStack space="$2" ai="center">
-              <Cloud />
-              <Paragraph>{(weather_settings.cloudLevel * 100).toPrecision(2)}%</Paragraph>
-              <ThermometerSun />
-              <Paragraph>{weather_settings.ambientTemp}°C</Paragraph>
-              <CloudRain />
-              <Paragraph>{(weather_settings.rain * 100).toPrecision(2)}%</Paragraph>
-              <CloudCog />
-              <Paragraph>{(weather_settings.weatherRandomness * 10).toPrecision(2)}%</Paragraph>
-            </XStack>
+            <Paragraph>{utcToZonedTime(new Date(race_date), Intl.DateTimeFormat().resolvedOptions().timeZone).toLocaleString()}</Paragraph>
+            <Weather {...weather_settings}  />
             <XStack space="$2" ai="center">
               <Clock />
               <Paragraph>Race Start: {start_times.r}:00</Paragraph>
             </XStack>
           </YStack>
-        </Card.Footer>
-      </Link>
-    </Card>
+        </>
+      }
+    />
   );
 };

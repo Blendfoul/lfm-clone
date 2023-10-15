@@ -23,6 +23,7 @@ export const TamaguiProvider = ({ children }: { children: React.ReactNode }) => 
   const [theme, setTheme] = useRootTheme()
 
   useServerInsertedHTML(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const rnwStyle = StyleSheet.getSheet()
     return (

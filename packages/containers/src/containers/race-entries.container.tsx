@@ -1,21 +1,15 @@
 import useSWR from "swr";
 import { Race } from "../types";
 import { useParams } from "solito/navigation";
-import { XStack, Spinner, Tabs, SizableText, Separator, H5 } from "@lfm-clone/ui";
+import { Tabs, SizableText, Separator, H5 } from "@lfm-clone/ui";
+
+import { EntryListContainer } from "./entry-list.container";
 
 type Params = { id: string };
 
 export const RaceEntries: React.FC = () => {
   const { id } = useParams<Params>();
-  const { data, error, isValidating } = useSWR<Race>(`race/${id}`);
-
-  if (isValidating) {
-    return (
-      <XStack justifyContent="center" alignItems="center">
-        <Spinner size="large" />
-      </XStack>
-    );
-  }
+  const { data, error } = useSWR<Race>(`race/${id}`);
 
   if (error || !data) {
     return null;
@@ -34,9 +28,9 @@ export const RaceEntries: React.FC = () => {
           <SizableText fontFamily="$body">Race Results</SizableText>
         </Tabs.Tab>
       </Tabs.List>
-      <Separator />
+      <Separator paddingVertical="$1.5" />
       <Tabs.Content value="entries">
-      <H5>Profile</H5>
+        <EntryListContainer />
       </Tabs.Content>
       <Tabs.Content value="quali">
       <H5>Profile</H5>

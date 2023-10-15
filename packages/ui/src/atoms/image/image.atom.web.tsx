@@ -1,14 +1,7 @@
-import { ImageProps } from "tamagui";
-import { default as NextImage } from "next/image";
+import { default as NextImage, ImageProps } from "next/image";
 
-export const Image: React.FC<ImageProps> = ({ source, width, height, alt, ...props }) => {
-  return (
-    <NextImage
-      src={(source as { uri: string }).uri}
-      width={width as number}
-      height={height as number}
-      alt={alt as string}
-      style={props as React.CSSProperties}
-    />
-  );
+import type { ImageComponentProps } from './props';
+
+export const Image: React.FC<ImageComponentProps> = (props) => {
+  return (<NextImage {...props['$platform-web'] as ImageProps} />);
 };

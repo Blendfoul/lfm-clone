@@ -2,7 +2,7 @@ import { useMemo, type PropsWithChildren } from 'react';
 
 import { SWRConfig } from 'swr';
 
-type ContainerProviderProps = PropsWithChildren<{}>;
+type ContainerProviderProps = PropsWithChildren;
 
 export const ContainerProvider: React.FC<ContainerProviderProps> = ({ children }) => {
   const defaultOptions: RequestInit = {
@@ -22,6 +22,7 @@ export const ContainerProvider: React.FC<ContainerProviderProps> = ({ children }
           ...defaultOptions,
           ...options,
         }).then((res) => res.json()),
+        revalidateOnFocus: false,
       }}
     >
       {children}

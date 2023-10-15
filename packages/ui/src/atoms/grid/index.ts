@@ -1,1 +1,1 @@
-export * from './grid.atom.web';
+export * from './grid.atom';

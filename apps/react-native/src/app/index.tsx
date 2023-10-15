@@ -1,4 +1,4 @@
-import { ApplicationStateProvider, ContainerProvider, HomeScreen, Provider, UserDetailScreen } from '@lfm-clone/containers';
+import { ApplicationStateProvider, ContainerProvider, HomeScreen, Provider, SessionDetailScreen } from '@lfm-clone/containers';
 import { DarkTheme, DefaultTheme, LinkingOptions, NavigationContainer, ThemeProvider } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useMemo } from 'react';
@@ -46,7 +46,7 @@ export default function Screen() {
                     title: 'Session',
                   }}
                   name='session'
-                  component={UserDetailScreen}
+                  component={SessionDetailScreen}
                 />
               </Stack.Navigator>
             </ThemeProvider>

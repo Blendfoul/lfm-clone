@@ -1,10 +1,11 @@
 'use client'
 
-import '@tamagui/core/reset.css';
+// import '@tamagui/core/reset.css';
 
-import { Stack } from '@lfm-clone/ui';
+import { Stack, Breadcrumb } from '@lfm-clone/ui';
 import { TamaguiProvider } from './TamaguiProvider';
 import { ApplicationStateProvider, ContainerProvider } from '@lfm-clone/containers';
+import { useRouter } from 'solito/navigation';
 
 if (process.env.NODE_ENV === 'production') {
   require('../public/tamagui.css')
@@ -17,7 +18,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <TamaguiProvider>
           <ContainerProvider>
             <ApplicationStateProvider>
-              <Stack padding="$3">
+              <Stack padding="$3" space>
+                <Breadcrumb 
+                  levels={[{
+                    label: 'Home',
+                    href: '/',
+                  }]}
+              />
                 {children}
               </Stack>
             </ApplicationStateProvider>

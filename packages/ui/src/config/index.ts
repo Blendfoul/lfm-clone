@@ -48,20 +48,26 @@ const bodyFont = createInterFont(
     sizeSize: (size) => Math.round(size * 1.1),
     sizeLineHeight: (size) => Math.round(size * 1.1 + (size > 20 ? 10 : 10)),
   }
-)
+);
 
 export const config = createTamagui({
   defaultFont: 'body',
   animations,
   shouldAddPrefersColorThemes: true,
   themeClassNameOnRoot: true,
-  shorthands,
+  shorthands: {
+    ...shorthands,
+    onClick: 'onPress',
+  },
   fonts: {
     body: bodyFont,
     heading: headingFont,
   },
   themes,
-  tokens,
+  tokens: {
+    ...tokens,
+    
+  },
   media: createMedia({
     xs: { maxWidth: 660 },
     sm: { maxWidth: 800 },
