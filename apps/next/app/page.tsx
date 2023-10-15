@@ -1,5 +1,5 @@
-'use client'
+'use client';
 
 import { HomeScreen } from '@lfm-clone/containers';
 
-export default HomeScreen
+export default HomeScreen;

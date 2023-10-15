@@ -1,31 +1,32 @@
-'use client'
+'use client';
 
-import '@tamagui/core/reset.css'
-import '@tamagui/polyfill-dev'
+import '@tamagui/core/reset.css';
+import '@tamagui/polyfill-dev';
 
-import { config as configBase } from '@tamagui/config'
-import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme'
-import { useServerInsertedHTML } from 'next/navigation'
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import { createTamagui, TamaguiProvider as TamaguiProviderOG } from 'tamagui'
+import React from 'react';
 
-import Tamagui from '../tamagui.config'
+import { config as configBase } from '@tamagui/config';
+import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme';
+import { useServerInsertedHTML } from 'next/navigation';
+import { StyleSheet } from 'react-native';
+import { TamaguiProvider as TamaguiProviderOG, createTamagui } from 'tamagui';
+
+import Tamagui from '../tamagui.config';
 
 const config = createTamagui({
   ...configBase,
   themeClassNameOnRoot: false,
-})
+});
 
-export type Conf = typeof config
+export type Conf = typeof config;
 
 export const TamaguiProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useRootTheme()
+  const [theme, setTheme] = useRootTheme();
 
   useServerInsertedHTML(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const rnwStyle = StyleSheet.getSheet()
+    const rnwStyle = StyleSheet.getSheet();
     return (
       <>
         <style dangerouslySetInnerHTML={{ __html: rnwStyle.textContent }} id={rnwStyle.id} />
@@ -39,18 +40,18 @@ export const TamaguiProvider = ({ children }: { children: React.ReactNode }) => 
           }}
         />
       </>
-    )
-  })
+    );
+  });
 
   return (
     <NextThemeProvider
       onChangeTheme={(next) => {
-        setTheme(next as any)
+        setTheme(next as any);
       }}
     >
       <TamaguiProviderOG config={config} themeClassNameOnRoot defaultTheme={theme}>
         {children}
       </TamaguiProviderOG>
     </NextThemeProvider>
-  )
-}
+  );
+};

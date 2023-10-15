@@ -1,5 +1,6 @@
-import React from "react";
-import { CardProps } from "tamagui";
+import React from 'react';
+
+import { CardProps } from 'tamagui';
 
 export type CardMoleculeProps = {
   title: string;

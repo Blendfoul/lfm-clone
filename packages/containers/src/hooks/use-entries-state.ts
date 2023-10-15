@@ -1,10 +1,12 @@
-import { useMemo } from "react";
-import useSWR from "swr";
-import { Race } from "../types";
+import { useMemo } from 'react';
+
+import useSWR from 'swr';
+
+import { Race } from '../types';
 
 type SplitInfo = {
   sof: number;
-  name: string;  
+  name: string;
 };
 
 export const useEntriesState = (raceId: string) => {

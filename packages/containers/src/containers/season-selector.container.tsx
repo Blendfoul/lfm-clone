@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import useSWR from "swr";
-import { Adapt, Select, Sheet } from "@lfm-clone/ui";
+import { Select } from "@lfm-clone/ui";
 
 import type { Season } from "../types";
 import { useApplicationState } from '../provider';

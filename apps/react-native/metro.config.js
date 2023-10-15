@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { withNxMetro } = require('@nx/react-native');
-const { getDefaultConfig } = require('metro-config');
-const exclusionList = require('metro-config/src/defaults/exclusionList');
 const { makeMetroConfig } = require('@rnx-kit/metro-config');
 const MetroSymlinksResolver = require('@rnx-kit/metro-resolver-symlinks');
+const { getDefaultConfig } = require('metro-config');
+const exclusionList = require('metro-config/src/defaults/exclusionList');
 
 module.exports = (async () => {
   const {
@@ -39,7 +39,7 @@ module.exports = (async () => {
       projectRoot: __dirname,
       // Specify folders to watch, in addition to Nx defaults (workspace libraries and node_modules)
       watchFolders: [],
-    },
+    }
   );
 
   return config;

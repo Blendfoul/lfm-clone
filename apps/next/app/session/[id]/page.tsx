@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { SessionDetailScreen } from '@lfm-clone/containers';
 

@@ -2,7 +2,7 @@
 
 export interface DriverCategory {
   driver_category_id: number;
-  category:           string;
-  cup_category:       string;
-  cup_category_id:    number;
+  category: string;
+  cup_category: string;
+  cup_category_id: number;
 }

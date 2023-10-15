@@ -13,6 +13,13 @@
         "tsConfig": "packages/ui/tsconfig.lib.json",
         "assets": []
       }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/ui/**/*.ts"]
+      }
     }
   }
 }

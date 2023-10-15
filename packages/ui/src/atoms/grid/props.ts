@@ -1,4 +1,4 @@
-import { StackPropsBase } from "tamagui";
+import { StackPropsBase } from 'tamagui';
 
 type StackProps = Omit<StackPropsBase, 'display'>;
 

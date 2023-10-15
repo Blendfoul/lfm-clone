@@ -1,4 +1,4 @@
-import { SelectProps } from "tamagui";
+import { SelectProps } from 'tamagui';
 
 type Option = {
   label: string;

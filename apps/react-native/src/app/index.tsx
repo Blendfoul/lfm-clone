@@ -1,7 +1,20 @@
-import { ApplicationStateProvider, ContainerProvider, HomeScreen, Provider, SessionDetailScreen } from '@lfm-clone/containers';
-import { DarkTheme, DefaultTheme, LinkingOptions, NavigationContainer, ThemeProvider } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useMemo } from 'react';
+
+import {
+  ApplicationStateProvider,
+  ContainerProvider,
+  HomeScreen,
+  Provider,
+  SessionDetailScreen,
+} from '@lfm-clone/containers';
+import {
+  DarkTheme,
+  DefaultTheme,
+  LinkingOptions,
+  NavigationContainer,
+  ThemeProvider,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useColorScheme } from 'react-native';
 
 type StackParamList = {
@@ -14,18 +27,19 @@ const Stack = createNativeStackNavigator<StackParamList>();
 export default function Screen() {
   const scheme = useColorScheme();
 
-  const linking: LinkingOptions<StackParamList> = useMemo(() => ({
-    prefixes: [
-
-    ],
-    config: {
-      initialRouteName: 'home',
-      screens: {
-        home: '/',
-        session: '/session/:id',
+  const linking: LinkingOptions<StackParamList> = useMemo(
+    () => ({
+      prefixes: [],
+      config: {
+        initialRouteName: 'home',
+        screens: {
+          home: '/',
+          session: '/session/:id',
+        },
       },
-    },
-  }), []);
+    }),
+    []
+  );
 
   return (
     <ContainerProvider>
@@ -38,14 +52,14 @@ export default function Screen() {
                   options={{
                     title: 'Home',
                   }}
-                  name='home'
+                  name="home"
                   component={HomeScreen}
                 />
                 <Stack.Screen
                   options={{
                     title: 'Session',
                   }}
-                  name='session'
+                  name="session"
                   component={SessionDetailScreen}
                 />
               </Stack.Navigator>
