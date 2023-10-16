@@ -22,11 +22,11 @@ export const SeasonSelector: React.FC = () => {
     const { series } = data;
 
     return series[ACC_KEY].series.map((series, index) => {
-      if(index === 0) {
+      if(index === 0 && !state.selectedSeries) {
         setState({
           ...state,
           selectedSeries: series.event_id,
-        })
+        });
       }
 
       return ({
@@ -38,10 +38,10 @@ export const SeasonSelector: React.FC = () => {
 
   const onSelect = useCallback((value: string) => {
     setState({
-      ...state,
-      selectedSeries: parseInt(value, 10),
-    });
-  }, [state, setState]);
+        ...state,
+        selectedSeries: parseInt(value, 10),
+      });
+  }, [setState, state]);
 
   if (error || !data) {
     return null;

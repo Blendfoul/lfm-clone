@@ -13,8 +13,6 @@ export const SessionGrid: React.FC = () => {
   const media = useMedia();
   const { state } = useApplicationState();
 
-  console.log(state);
-
   const { data, isValidating, error, mutate } = useSWR<SessionContainer>(`v2/seasons/getUpcomingSessions/${state.selectedSeries ?? CURRENT_SERIES}`, {
     revalidateOnFocus: true,
   });
@@ -49,8 +47,8 @@ export const SessionGrid: React.FC = () => {
     return null;
   }
 
-  if (Platform.OS === 'web') {
-    return (
+  return (
+    <ScrollView space refreshControl={<RefreshControl onRefresh={mutate} refreshing={isValidating} />}>
       <Grid gridTemplateColumns={templateColumns} gap="$3">
         {
           sessions.map((session) => (
@@ -58,16 +56,6 @@ export const SessionGrid: React.FC = () => {
           ))
         }
       </Grid>
-    );
-  }
-
-  return (
-    <ScrollView space refreshControl={<RefreshControl onRefresh={mutate} refreshing={isValidating} />}>
-      {
-        sessions.map((session) => (
-          <SessionCard key={session.race_id} {...session} />
-        ))
-      }
     </ScrollView>
   );
 };

@@ -3,6 +3,7 @@ import { User, Clock } from '@tamagui/lucide-icons';
 import { utcToZonedTime } from 'date-fns-tz';
 
 import { Card, Image, Paragraph, Weather, XStack, YStack } from '@lfm-clone/ui';
+import { SignUp } from "../actions";
 
 export const SessionCard: React.FC<Session> = ({ track, race_id, race_date, season_week, registered, slots, weather_settings, start_times }) => {
   return (
@@ -21,12 +22,17 @@ export const SessionCard: React.FC<Session> = ({ track, race_id, race_date, seas
               overflow="hidden"
               width="100%"
               height="100%"
-              source={{ uri: `https://lowfuelmotorsport.com/assets/img/tracks/${track.thumbnail}` }}
+              source={{ uri: `https://lowfuelmotorsport.com/assets/img/tracks/${track.thumbnail}`, width: 370, height: 200 }}
               alt={track.track_name}
               $platform-web={{
                 loading: 'eager',
                 priority: true,
                 fill: true,
+                style: {
+                  aspectRatio: '16 / 9',
+                  objectFit: 'contain',
+                  objectPosition: 'center',
+                },
                 src: `https://lowfuelmotorsport.com/assets/img/tracks/${track.thumbnail}`,
                 alt: track.track_name,
               }}
@@ -36,6 +42,7 @@ export const SessionCard: React.FC<Session> = ({ track, race_id, race_date, seas
             <User />
             <Paragraph>{registered} / {slots}</Paragraph>
           </XStack>
+          <SignUp id={race_id} />
         </>
       }
       footer={

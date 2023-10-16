@@ -32,24 +32,10 @@ const tamaguiPlugin = withTamagui({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  modularizeImports: {
-    '@tamagui/lucide-icons': {
-      transform: `@tamagui/lucide-icons/dist/esm/icons/{{kebabCase member}}`,
-      skipDefaultConversion: true,
-    },
-  },
-  transpilePackages: [
-    'solito',
-    'react-native-web',
-    'expo-linking',
-    'expo-constants',
-    'expo-modules-core',
-  ],
+  transpilePackages: ['solito', 'react-native-web'],
   experimental: {
     scrollRestoration: true,
+    optimizePackageImports: ['@tamagui/lucide-icons', 'tamagui'],
   },
   images: {
     domains: [
@@ -59,6 +45,7 @@ const nextConfig = {
       'api2.lowfuelmotorsport.com',
       'avatars.akamai.steamstatic.com',
       'api.lowfuelmotorsport.de',
+      'flagcdn.com',
     ],
   },
 };

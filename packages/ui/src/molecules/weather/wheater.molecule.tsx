@@ -1,8 +1,9 @@
 import { Cloud, ThermometerSun, CloudRain, CloudCog } from "@tamagui/lucide-icons";
 import { XStack, Paragraph } from "tamagui";
 import { WeatherProps } from "./props";
+import { memo } from "react";
 
-export const Weather: React.FC<WeatherProps> = ({ cloudLevel, ambientTemp, rain, weatherRandomness }) => {
+const WeatherMolecule: React.FC<WeatherProps> = ({ cloudLevel, ambientTemp, rain, weatherRandomness }) => {
   return (
     <XStack space="$2" ai="center">
       <Cloud />
@@ -16,3 +17,5 @@ export const Weather: React.FC<WeatherProps> = ({ cloudLevel, ambientTemp, rain,
     </XStack>
   );
 };
+
+export const Weather = memo(WeatherMolecule);

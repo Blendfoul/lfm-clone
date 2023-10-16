@@ -16,8 +16,8 @@ export const RaceEntries: React.FC = () => {
   }
 
   return (
-    <Tabs defaultValue="" width="100%" orientation="horizontal" flexDirection="column">
-      <Tabs.List>
+    <Tabs defaultValue="entries" width="100%" orientation="horizontal" flexDirection="column">
+      <Tabs.List $platform-native={{ justifyContent: 'center' }}>
         <Tabs.Tab value="entries">
           <SizableText fontFamily="$body">Entry List</SizableText>
         </Tabs.Tab>

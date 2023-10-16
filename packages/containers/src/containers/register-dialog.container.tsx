@@ -38,8 +38,6 @@ export const RegisterDialog: React.FC<Params> = ({ isOpen }) => {
       },
       registerDialogOpen: true,
     });
-
-    console.log(state, value);
   }, []);
 
   const onRegister = useCallback(() => {
@@ -56,8 +54,6 @@ export const RegisterDialog: React.FC<Params> = ({ isOpen }) => {
       },
       registerDialogOpen: false,
     });
-
-    console.log(state.registerInformation);
   }, [user]);
 
   const lastValidCar = useMemo(() => {
@@ -103,7 +99,11 @@ export const RegisterDialog: React.FC<Params> = ({ isOpen }) => {
             />
           </Dialog.Description>
           <Dialog.Close displayWhenAdapted asChild>
-            <Button theme="alt1" aria-label="Close" onPress={onRegister}>
+            <Button 
+              theme="alt1" 
+              aria-label="Register"
+              onPress={onRegister}
+            >
               Register to Race
             </Button>
           </Dialog.Close>

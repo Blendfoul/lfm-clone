@@ -1,8 +1,9 @@
 import React, { PropsWithChildren, createContext } from "react";
 
-type ApplicationState = {
+export type ApplicationState = {
   selectedSeries?: number;
   registerDialogOpen: boolean;
+  signOutDialogOpen?: boolean;
   registerInformation?: {
     car_model?: number;
     chat?: boolean;
@@ -21,6 +22,7 @@ type ApplicationState = {
 const initialState: ApplicationState = {
   selectedSeries: undefined,
   registerDialogOpen: false,
+  signOutDialogOpen: false,
   registerInformation: {
     chat: false,
     code_of_conduct: false,
@@ -40,7 +42,7 @@ export const ApplicationStateProvider: React.FC<PropsWithChildren> = ({ children
   const value = React.useMemo(() => ({
     state,
     setState,
-  }), [state]);
+  }), [state, setState]);
 
   return (
     <ApplicationStateContext.Provider value={value}>

@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { isAfter, isBefore } from 'date-fns';
 import utcToZonedTime from 'date-fns-tz/utcToZonedTime';
-import { useParams } from 'solito/navigation';
 import useSWR from 'swr';
 
 import { Season, User } from '../types';
@@ -13,6 +12,7 @@ type Props = {
   signUpCloses?: string;
   isLive?: number;
   eventId?: number;
+  id: number;
 };
 
 function humanizeFutureToNow(targetDate: Date): string {
@@ -38,8 +38,7 @@ function humanizeFutureToNow(targetDate: Date): string {
   return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 }
 
-export const useRegistration = ({ signUpCloses, signUpStart, isLive, eventId }: Props) => {
-  const { id } = useParams<{ id: string }>();
+export const useRegistration = ({ signUpCloses, signUpStart, isLive, eventId, id }: Props) => {
   const [timeLeft, setTimeLeft] = useState<string>();
   const [closed, setClosed] = useState<boolean>(false);
   const [validSignUp, setValidSignUp] = useState<boolean>(true);

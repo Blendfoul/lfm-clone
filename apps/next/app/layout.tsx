@@ -12,6 +12,9 @@ if (process.env.NODE_ENV === 'production') {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://api2.lowfuelmotorsport.com" />
+      </head>
       <body>
         <TamaguiProvider>
           <ContainerProvider>

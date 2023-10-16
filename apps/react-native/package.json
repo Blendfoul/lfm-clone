@@ -32,6 +32,8 @@
     "@rnx-kit/metro-resolver-symlinks": "*",
     "next": "*",
     "date-fns-tz": "*",
-    "date-fns": "*"
+    "date-fns": "*",
+    "@react-navigation/drawer": "*",
+    "react-native-gesture-handler": "*"
   }
 }

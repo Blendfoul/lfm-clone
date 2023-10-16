@@ -3,10 +3,10 @@ import { useMemo } from 'react';
 import {
   ApplicationStateProvider,
   ContainerProvider,
-  HomeScreen,
   Provider,
-  SessionDetailScreen,
+  UserScreen,
 } from '@lfm-clone/containers';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
   DarkTheme,
   DefaultTheme,
@@ -14,15 +14,16 @@ import {
   NavigationContainer,
   ThemeProvider,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useColorScheme } from 'react-native';
 
-type StackParamList = {
-  home: undefined;
-  session: { id: string };
+import { StackParamList, SeasonsNavigator } from './seasons-navigator';
+
+type DrawerParamList = {
+  home: StackParamList;
+  user?: { userId: string };
 };
 
-const Stack = createNativeStackNavigator<StackParamList>();
+const Drawer = createDrawerNavigator<DrawerParamList>();
 
 export default function Screen() {
   const scheme = useColorScheme();
@@ -35,6 +36,8 @@ export default function Screen() {
         screens: {
           home: '/',
           session: '/session/:id',
+          user: '/user',
+          profile: '/user/:userId',
         },
       },
     }),
@@ -47,22 +50,22 @@ export default function Screen() {
         <Provider>
           <NavigationContainer linking={linking}>
             <ThemeProvider value={scheme === 'dark' ? DarkTheme : DefaultTheme}>
-              <Stack.Navigator>
-                <Stack.Screen
+              <Drawer.Navigator>
+                <Drawer.Screen
+                  name="home"
+                  component={SeasonsNavigator}
                   options={{
                     title: 'Home',
                   }}
-                  name="home"
-                  component={HomeScreen}
                 />
-                <Stack.Screen
+                <Drawer.Screen
+                  name="user"
+                  component={UserScreen}
                   options={{
-                    title: 'Session',
+                    title: 'User',
                   }}
-                  name="session"
-                  component={SessionDetailScreen}
                 />
-              </Stack.Navigator>
+              </Drawer.Navigator>
             </ThemeProvider>
           </NavigationContainer>
         </Provider>
