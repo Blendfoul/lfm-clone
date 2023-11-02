@@ -1,13 +1,10 @@
 import { useMemo } from 'react';
 
 import { LicenseProps } from './props';
+import { checkSrLicense } from './utils';
 import { SizableText, XGroup } from '../../atoms';
 
-export const License: React.FC<LicenseProps> = ({
-  license,
-  safetyRating,
-  safetyRatingDivision,
-}) => {
+export const License: React.FC<LicenseProps> = ({ license, safetyRating }) => {
   const licenseColors = useMemo(
     () => ({
       ROOKIE: 'red',
@@ -40,19 +37,25 @@ export const License: React.FC<LicenseProps> = ({
     []
   );
 
+  const calculatedSafetyRatingLicense = useMemo(
+    () => checkSrLicense(+safetyRating),
+    [safetyRating]
+  );
+
   return (
     <XGroup orientation="horizontal" size="$3">
       <XGroup.Item>
         <SizableText
-          width="$4.5"
+          width="$6.5"
           textAlign="center"
           fontFamily="$body"
-          backgroundColor={srColors['C']}
+          backgroundColor={srColors[calculatedSafetyRatingLicense[0]]}
           px="$2"
           py="$0.5"
           fontWeight="bold"
+          fontSize="$1"
         >
-          {safetyRating}
+          {calculatedSafetyRatingLicense} ({safetyRating})
         </SizableText>
       </XGroup.Item>
       <XGroup.Item>
@@ -65,6 +68,7 @@ export const License: React.FC<LicenseProps> = ({
           py="$0.5"
           textAlign="center"
           fontWeight="bold"
+          fontSize="$1"
         >
           {license}
         </SizableText>

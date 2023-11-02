@@ -1,9 +1,11 @@
-import React, { PropsWithChildren, createContext } from "react";
+import React, { PropsWithChildren, Reducer, createContext, useReducer } from 'react';
 
 export type ApplicationState = {
   selectedSeries?: number;
   registerDialogOpen: boolean;
+  headerShown: boolean;
   signOutDialogOpen?: boolean;
+  raceId?: number;
   registerInformation?: {
     car_model?: number;
     chat?: boolean;
@@ -17,17 +19,18 @@ export type ApplicationState = {
     vorname?: string;
     youtube_channel?: string;
   };
-}
+};
 
 const initialState: ApplicationState = {
   selectedSeries: undefined,
   registerDialogOpen: false,
   signOutDialogOpen: false,
+  headerShown: true,
   registerInformation: {
     chat: false,
     code_of_conduct: false,
     redletters: false,
-  }
+  },
 };
 
 export const ApplicationStateContext = createContext({
@@ -36,18 +39,27 @@ export const ApplicationStateContext = createContext({
   setState: (state: ApplicationState) => {},
 });
 
-export const ApplicationStateProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [state, setState] = React.useState<ApplicationState>(initialState);
+const applicationReducer: Reducer<ApplicationState, Partial<ApplicationState>> = (
+  state,
+  action
+) => ({
+  ...state,
+  ...action,
+});
 
-  const value = React.useMemo(() => ({
-    state,
-    setState,
-  }), [state, setState]);
+export const ApplicationStateProvider: React.FC<PropsWithChildren> = ({ children }) => {
+  const [state, setState] = useReducer(applicationReducer, initialState);
+
+  const value = React.useMemo(
+    () => ({
+      state,
+      setState,
+    }),
+    [state]
+  );
 
   return (
-    <ApplicationStateContext.Provider value={value}>
-      {children}
-    </ApplicationStateContext.Provider>
+    <ApplicationStateContext.Provider value={value}>{children}</ApplicationStateContext.Provider>
   );
 };
 
@@ -59,4 +71,4 @@ export const useApplicationState = () => {
   }
 
   return context;
-}
+};

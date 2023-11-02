@@ -8,8 +8,6 @@ import { Season, User } from '../types';
 import { UpcomingSession } from '../types/upcoming-session';
 
 type Props = {
-  signUpStart?: string;
-  signUpCloses?: string;
   isLive?: number;
   eventId?: number;
   id: number;
@@ -38,13 +36,14 @@ function humanizeFutureToNow(targetDate: Date): string {
   return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 }
 
-export const useRegistration = ({ signUpCloses, signUpStart, isLive, eventId, id }: Props) => {
+export const useRegistration = ({ isLive, eventId, id }: Props) => {
   const [timeLeft, setTimeLeft] = useState<string>();
   const [closed, setClosed] = useState<boolean>(false);
   const [validSignUp, setValidSignUp] = useState<boolean>(true);
   const { data: user } = useSWR<User>('user');
   const { data: eventData } = useSWR<Season>('seasons/getMinifiedSeasonBySim');
   const { data: raceData } = useSWR<UpcomingSession>(`v2/seasons/getUpcomingSessions/${eventId}`);
+  const { data: userInRace } = useSWR<{ sucess: boolean }>(`race/${id}/amIIn`);
 
   const raceDetails = raceData?.data?.find(({ race_id }) => race_id === +id);
 
@@ -72,12 +71,14 @@ export const useRegistration = ({ signUpCloses, signUpStart, isLive, eventId, id
       Intl.DateTimeFormat().resolvedOptions().timeZone
     );
 
-    if (isAfter(now, signupStartsDate) && isBefore(now, signupClosesDate)) {
+    const isInSignUpPeriod = isAfter(now, signupStartsDate) && isBefore(now, signupClosesDate);
+
+    if (isInSignUpPeriod) {
       return setValidSignUp(true);
     }
 
-    return setValidSignUp(!hasSufficientSr);
-  }, [isLive, signUpCloses, signUpStart, user?.safety_rating, event?.min_sr, event?.max_sr]);
+    return setValidSignUp(!hasSufficientSr && isInSignUpPeriod);
+  }, [isLive, user?.safety_rating, event?.min_sr, event?.max_sr]);
 
   const countUntilSignUp = useCallback(() => {
     checkSignUpEnabled();
@@ -97,22 +98,24 @@ export const useRegistration = ({ signUpCloses, signUpStart, isLive, eventId, id
       Intl.DateTimeFormat().resolvedOptions().timeZone
     );
 
-    if (isBefore(signupStartsDate, now)) {
+    if (isBefore(now, signupStartsDate)) {
       const interval = humanizeFutureToNow(signupStartsDate);
 
       setTimeLeft(interval);
+      setClosed(true);
     }
 
     if (isBefore(now, signupClosesDate)) {
       const interval = humanizeFutureToNow(signupClosesDate);
 
       setTimeLeft(interval);
+      setClosed(false);
     }
 
-    if (isAfter(now, signupClosesDate)) {
+    if (isAfter(signupClosesDate, now)) {
       setClosed(true);
     }
-  }, [signUpStart, signUpCloses]);
+  }, [raceDetails?.signupCloses, !raceDetails?.signupStart]);
 
   useEffect(() => {
     if (!eventId) {
@@ -130,8 +133,8 @@ export const useRegistration = ({ signUpCloses, signUpStart, isLive, eventId, id
 
   return {
     timeLeft,
-    closed,
+    closed: !closed,
     validSignUp,
-    signedUp: raceDetails?.signedUp ?? false,
+    signedUp: userInRace?.sucess ?? false,
   };
 };

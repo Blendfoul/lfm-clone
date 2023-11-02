@@ -6,9 +6,7 @@
   "targets": {
     "build": {
       "executor": "@nx/next:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/next"
@@ -45,14 +43,10 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/next/**/*.{ts,tsx,js,jsx}"
-        ],
+        "lintFilePatterns": ["apps/next/**/*.{ts,tsx,js,jsx}"],
         "eslintConfig": "apps/next/.eslintrc.json",
         "ignorePath": "apps/next/.eslintignore",
         "fix": true,

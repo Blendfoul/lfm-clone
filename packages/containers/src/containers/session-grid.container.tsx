@@ -1,11 +1,12 @@
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
 
-import useSWR from "swr";
-import { Session, SessionContainer } from "../types";
-import { ScrollView, Grid, useMedia } from "@lfm-clone/ui";
-import { SessionCard } from "./session-card.container";
-import { useApplicationState } from "../provider";
-import { Platform, RefreshControl } from "react-native";
+import { ScrollView, Grid, useMedia } from '@lfm-clone/ui';
+import { RefreshControl } from 'react-native';
+import useSWR from 'swr';
+
+import { SessionCard } from './session-card.container';
+import { useApplicationState } from '../provider';
+import { Session, SessionContainer } from '../types';
 
 const CURRENT_SERIES = 142;
 
@@ -13,9 +14,13 @@ export const SessionGrid: React.FC = () => {
   const media = useMedia();
   const { state } = useApplicationState();
 
-  const { data, isValidating, error, mutate } = useSWR<SessionContainer>(`v2/seasons/getUpcomingSessions/${state.selectedSeries ?? CURRENT_SERIES}`, {
-    revalidateOnFocus: true,
-  });
+  const { data, isValidating, error, mutate } = useSWR<SessionContainer>(
+    `v2/seasons/getUpcomingSessions/${state.selectedSeries ?? CURRENT_SERIES}`,
+    {
+      revalidateOnFocus: true,
+      revalidateOnMount: true,
+    }
+  );
 
   const sessions = useMemo(() => {
     if (!data) {
@@ -31,7 +36,7 @@ export const SessionGrid: React.FC = () => {
     if (media.gtLg) {
       return 'repeat(4, auto)';
     }
-    
+
     if (media.gtMd) {
       return 'repeat(3, auto)';
     }
@@ -48,17 +53,15 @@ export const SessionGrid: React.FC = () => {
   }
 
   return (
-    <ScrollView space refreshControl={<RefreshControl onRefresh={mutate} refreshing={isValidating} />}>
+    <ScrollView
+      space
+      refreshControl={<RefreshControl onRefresh={mutate} refreshing={isValidating} />}
+    >
       <Grid gridTemplateColumns={templateColumns} gap="$3">
-        {
-          sessions.map((session) => (
-            <SessionCard key={session.race_id} {...session} />
-          ))
-        }
+        {sessions.map((session) => (
+          <SessionCard key={session.race_id} {...session} />
+        ))}
       </Grid>
     </ScrollView>
   );
 };
-
-
-  

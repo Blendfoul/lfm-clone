@@ -2,9 +2,7 @@
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nx/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "serve", "lint"]
-      }
+      "options": {}
     }
   },
   "affected": {
@@ -21,10 +19,17 @@
         "{workspaceRoot}/.eslintrc.json",
         "{workspaceRoot}/.eslintignore",
         "{workspaceRoot}/eslint.config.js"
-      ]
+      ],
+      "cache": true
     },
     "test": {
       "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"]
+    },
+    "build": {
+      "cache": true
+    },
+    "serve": {
+      "cache": true
     }
   }
 }

@@ -1,15 +1,15 @@
-import useSWR from "swr";
-import { Race } from "../types";
-import { useParams } from "solito/navigation";
-import { Tabs, SizableText, Separator, H5 } from "@lfm-clone/ui";
+import { Tabs, SizableText, Separator, H5 } from '@lfm-clone/ui';
+import { useParams } from 'solito/navigation';
+import useSWR from 'swr';
 
-import { EntryListContainer } from "./entry-list.container";
+import { EntryListContainer } from './entry-list.container';
+import { Race } from '../types';
 
 type Params = { id: string };
 
 export const RaceEntries: React.FC = () => {
   const { id } = useParams<Params>();
-  const { data, error } = useSWR<Race>(`race/${id}`);
+  const { data, error } = useSWR<Race>(`race/${id}`, { revalidateOnFocus: true });
 
   if (error || !data) {
     return null;
@@ -33,10 +33,10 @@ export const RaceEntries: React.FC = () => {
         <EntryListContainer />
       </Tabs.Content>
       <Tabs.Content value="quali">
-      <H5>Profile</H5>
+        <H5>Profile</H5>
       </Tabs.Content>
       <Tabs.Content value="race">
-      <H5>Profile</H5>
+        <H5>Profile</H5>
       </Tabs.Content>
     </Tabs>
   );

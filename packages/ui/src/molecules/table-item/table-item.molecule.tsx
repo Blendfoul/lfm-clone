@@ -1,5 +1,7 @@
+import { Link } from 'solito/link';
+
 import { TableItemProps } from './props';
-import { Grid, SizableText, Image, YStack, Adapt, XGroup } from '../../atoms';
+import { Grid, SizableText, Image, YStack, XGroup } from '../../atoms';
 
 export const TableItem: React.FC<TableItemProps> = ({
   trackPosition,
@@ -7,12 +9,13 @@ export const TableItem: React.FC<TableItemProps> = ({
   team,
   avatar,
   origin,
+  userId,
   children,
   ...rest
 }) => {
   return (
-    <Grid {...rest} justifyContent="space-between">
-      <XGroup ai="center">
+    <Grid {...rest} justifyContent="flex-start">
+      <XGroup ai="center" width="$7">
         <XGroup.Item>
           <SizableText width="$2.5" fontFamily="$body" textAlign="center">
             #{trackPosition}
@@ -23,10 +26,10 @@ export const TableItem: React.FC<TableItemProps> = ({
             source={{ uri: `https://flagcdn.com/h40/${origin}.png` }}
             alt={name.name}
             width={35}
-            height={35}
+            height={25}
             $platform-web={{
               width: 35,
-              height: 35,
+              height: 25,
               src: `https://flagcdn.com/h40/${origin}.png`,
               alt: name.name,
               style: {
@@ -52,16 +55,13 @@ export const TableItem: React.FC<TableItemProps> = ({
           },
         }}
       />
-      <YStack space="$0" gap="$0">
-        <SizableText fontFamily="$body">
-          <Adapt when="gtSm">{name.name}</Adapt>
-          <Adapt when="sm">{name.shortName}</Adapt>
+      <YStack space="$0" gap="$0" width="$19">
+        <Link href={`/user/${userId}`}>
+          <SizableText fontFamily="$body">{name.name}</SizableText>
+        </Link>
+        <SizableText fontFamily="$body" theme="alt1" fontSize="$1">
+          {team}
         </SizableText>
-        <Adapt when="gtSm">
-          <SizableText fontFamily="$body" theme="alt1" fontSize="$1">
-            {team}
-          </SizableText>
-        </Adapt>
       </YStack>
       {children}
     </Grid>

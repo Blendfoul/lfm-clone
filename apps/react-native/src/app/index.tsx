@@ -1,12 +1,7 @@
 import { useMemo } from 'react';
 
-import {
-  ApplicationStateProvider,
-  ContainerProvider,
-  Provider,
-  UserScreen,
-} from '@lfm-clone/containers';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { ApplicationStateProvider, ContainerProvider, Provider } from '@lfm-clone/containers';
+import { DialogProvider } from '@lfm-clone/containers';
 import {
   DarkTheme,
   DefaultTheme,
@@ -16,14 +11,8 @@ import {
 } from '@react-navigation/native';
 import { useColorScheme } from 'react-native';
 
-import { StackParamList, SeasonsNavigator } from './seasons-navigator';
-
-type DrawerParamList = {
-  home: StackParamList;
-  user?: { userId: string };
-};
-
-const Drawer = createDrawerNavigator<DrawerParamList>();
+import { DrawerNavigator } from './drawer-navigator';
+import { StackParamList } from './seasons-navigator';
 
 export default function Screen() {
   const scheme = useColorScheme();
@@ -32,12 +21,12 @@ export default function Screen() {
     () => ({
       prefixes: [],
       config: {
-        initialRouteName: 'home',
+        initialRouteName: 'home-root',
         screens: {
-          home: '/',
+          'home-root': '/',
           session: '/session/:id',
           user: '/user',
-          profile: '/user/:userId',
+          profile: '/user/:id',
         },
       },
     }),
@@ -50,22 +39,9 @@ export default function Screen() {
         <Provider>
           <NavigationContainer linking={linking}>
             <ThemeProvider value={scheme === 'dark' ? DarkTheme : DefaultTheme}>
-              <Drawer.Navigator>
-                <Drawer.Screen
-                  name="home"
-                  component={SeasonsNavigator}
-                  options={{
-                    title: 'Home',
-                  }}
-                />
-                <Drawer.Screen
-                  name="user"
-                  component={UserScreen}
-                  options={{
-                    title: 'User',
-                  }}
-                />
-              </Drawer.Navigator>
+              <DialogProvider>
+                <DrawerNavigator />
+              </DialogProvider>
             </ThemeProvider>
           </NavigationContainer>
         </Provider>

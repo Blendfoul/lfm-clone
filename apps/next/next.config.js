@@ -19,6 +19,7 @@ const tamaguiPlugin = withTamagui({
   outputCSS: process.env.NODE_ENV === 'production' ? './public/tamagui.css' : null,
   logTimings: true,
   disableExtraction,
+  appDir: true,
   enableCSSOptimizations: false,
   // experiment - reduced bundle size react-native-web
   useReactNativeWebLite: true,

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { UserInfoProps } from './props';
-import { YStack, SizableText, Stack, Image, XStack, Paragraph, XGroup } from '../../atoms';
+import { YStack, SizableText, Stack, Image, XStack, XGroup } from '../../atoms';
 import { Card } from '../card';
 import { License } from '../license/license.molecule';
 
@@ -16,13 +16,14 @@ export const UserInformation: React.FC<UserInfoProps> = ({
 }) => {
   return (
     <Card
+      bordered
       title=""
       m="$2"
       header={
         <>
           <Stack flexDirection="row" space>
             <YStack flex={1} space="$2">
-              <XStack flex={1} jc="space-between" ai="center">
+              <XStack flex={1} jc="space-between" ai="center" gap="$2">
                 <SizableText fontFamily="$body">{name}</SizableText>
                 <Image
                   source={{ uri: `https://flagcdn.com/h40/${origin.toLowerCase()}.png` }}
@@ -32,7 +33,7 @@ export const UserInformation: React.FC<UserInfoProps> = ({
                   borderRadius={5}
                   $platform-web={{
                     width: 35,
-                    height: 35,
+                    height: 25,
                     src: `https://flagcdn.com/h40/${origin.toLowerCase()}.png`,
                     alt: name,
                     style: {
@@ -77,8 +78,8 @@ export const UserInformation: React.FC<UserInfoProps> = ({
                     width={45}
                     height={27}
                     $platform-web={{
-                      width: 16,
-                      height: 16,
+                      width: 45,
+                      height: 27,
                       src: `https://lowfuelmotorsport.com${rating.logo_url}`,
                       alt: rating.name,
                     }}

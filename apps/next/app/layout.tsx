@@ -1,6 +1,6 @@
 'use client';
 
-import { ApplicationStateProvider, ContainerProvider } from '@lfm-clone/containers';
+import { ApplicationStateProvider, ContainerProvider, DialogProvider } from '@lfm-clone/containers';
 import { Breadcrumb, Stack } from '@lfm-clone/ui';
 
 import { TamaguiProvider } from './TamaguiProvider';
@@ -19,17 +19,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <TamaguiProvider>
           <ContainerProvider>
             <ApplicationStateProvider>
-              <Stack padding="$3" space>
-                <Breadcrumb
-                  levels={[
-                    {
-                      label: 'Home',
-                      href: '/',
-                    },
-                  ]}
-                />
-                {children}
-              </Stack>
+              <DialogProvider>
+                <Stack padding="$3" space>
+                  <Breadcrumb
+                    levels={[
+                      {
+                        label: 'Home',
+                        href: '/',
+                      },
+                    ]}
+                  />
+                  {children}
+                </Stack>
+              </DialogProvider>
             </ApplicationStateProvider>
           </ContainerProvider>
         </TamaguiProvider>

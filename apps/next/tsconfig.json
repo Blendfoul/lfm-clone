@@ -43,7 +43,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "../../dist/apps/next/.next/types/**/*.ts"
-  ],
+, "../../packages/containers/src/provider/components/dialog-provider.tsx"  ],
   "exclude": [
     "node_modules"
   ]

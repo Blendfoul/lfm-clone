@@ -1,10 +1,11 @@
 import React, { useCallback, useMemo } from 'react';
 
-import useSWR from "swr";
-import { useRegistration } from "../../hooks/use-regsitration";
-import { Race } from "../../types";
 import { Button } from '@lfm-clone/ui';
+import useSWR from 'swr';
+
+import { useRegistration } from '../../hooks/use-regsitration';
 import { useApplicationState } from '../../provider';
+import { Race } from '../../types';
 
 type Params = { id: number };
 
@@ -14,8 +15,6 @@ export const SignUp: React.FC<Params> = ({ id }) => {
   const { closed, timeLeft, validSignUp, signedUp } = useRegistration({
     eventId: data?.event_id,
     isLive: data?.isLive,
-    signUpCloses: data?.event.signup_stop,
-    signUpStart: data?.event.signup_start,
     id,
   });
 
@@ -23,18 +22,25 @@ export const SignUp: React.FC<Params> = ({ id }) => {
     if (signedUp) {
       setState({
         ...state,
+        raceId: id,
         signOutDialogOpen: true,
       });
+
       return;
     }
 
     setState({
       ...state,
+      raceId: id,
       registerDialogOpen: true,
     });
-  }, []);
+  }, [id, signedUp]);
 
   const buttonText = useMemo(() => {
+    if (isValidating) {
+      return 'Loading...';
+    }
+
     if (signedUp) {
       return 'Sign Out';
     }
@@ -48,14 +54,10 @@ export const SignUp: React.FC<Params> = ({ id }) => {
     }
 
     return `Register - ${timeLeft}`;
-  }, [closed, validSignUp, timeLeft]);
+  }, [closed, validSignUp, timeLeft, isValidating, signedUp]);
 
   return (
-    <Button 
-      width="100%"
-      onPress={onRegister}
-      disabled={closed || !validSignUp || isValidating}
-    >
+    <Button width="100%" onPress={onRegister} disabled={closed || !validSignUp || isValidating}>
       {buttonText}
     </Button>
   );
