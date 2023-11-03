@@ -23,12 +23,14 @@ export const RaceInformation: React.FC = () => {
       title={`${data.event.event_name} - #${data.race_id}`}
       height="fit-content"
       header={
-        <>
+        <YStack width="100%" aspectRatio={16 / 9}>
           <Image 
+            resizeMode="contain"
+            overflow="hidden"
+            width="100%"
+            height="100%"
             source={{ uri: `https://lowfuelmotorsport.com/assets/img/tracks/${data.track.thumbnail}` }} 
             alt={data.track.track_name} 
-            width={350} 
-            height={200}
             $platform-web={{
               loading: 'eager',
               priority: true,
@@ -42,7 +44,7 @@ export const RaceInformation: React.FC = () => {
           <XStack space="$1" ai="center" jc="center" w="100%" pt="$2">
             <SignUp id={+id} />
           </XStack>
-        </>
+        </YStack>
       }
       footer={
         <YStack space>

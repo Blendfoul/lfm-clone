@@ -16,7 +16,7 @@ export const SessionCard: React.FC<Session> = ({ track, race_id, race_date, seas
       title={`Week ${season_week} | ${track.track_name}`}
       header={
         <>
-          <XStack width="100%" height={250} aspectRatio={16 / 9}>
+          <XStack width="100%" aspectRatio={21 / 9}>
             <Image 
               resizeMode="contain"
               overflow="hidden"
